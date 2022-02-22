@@ -17,10 +17,10 @@ jobs:
         with:
           fetch-depth: 0
       - name: Get changed files within arangod, client-tools (arangosh), lib, & tests
-      - run: git diff --cached --diff-filter=ACMRT --name-only ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} -- arangod/ lib/ client-tools/ tests/ | grep -e '\.ipp$' -e '\.tpp$' -e '\.cpp$' -e '\.hpp$' -e '\.cc$' -e '\.c$' -e '\.h$'
+        run: git diff --cached --diff-filter=ACMRT --name-only ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} -- arangod/ lib/ client-tools/ tests/ | grep -e '\.ipp$' -e '\.tpp$' -e '\.cpp$' -e '\.hpp$' -e '\.cc$' -e '\.c$' -e '\.h$'
       - name: Pipe into file
-      - run: git diff --cached --diff-filter=ACMRT --name-only ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} -- arangod/ lib/ client-tools/ tests/ | grep -e '\.ipp$' -e '\.tpp$' -e '\.cpp$' -e '\.hpp$' -e '\.cc$' -e '\.c$' -e '\.h$' > CHANGED_FILES      
+        run: git diff --cached --diff-filter=ACMRT --name-only ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} -- arangod/ lib/ client-tools/ tests/ | grep -e '\.ipp$' -e '\.tpp$' -e '\.cpp$' -e '\.hpp$' -e '\.cc$' -e '\.c$' -e '\.h$' > CHANGED_FILES      
       - name: run ls
-      - run: ls -al
+        run: ls -al
       - name: arangodb-clang-format
         uses: arangodb/clang-format-action@1.0.1
