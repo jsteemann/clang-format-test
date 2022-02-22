@@ -16,11 +16,11 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: Get changed files within arangod, client-tools (arangosh), lib, & tests
-        run: git diff --cached --diff-filter=ACMRT --name-only ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} -- arangod/ lib/ client-tools/ tests/ | grep -e '\.ipp$' -e '\.tpp$' -e '\.cpp$' -e '\.hpp$' -e '\.cc$' -e '\.c$' -e '\.h$'
-      - name: Pipe into file
-        run: git diff --cached --diff-filter=ACMRT --name-only ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} -- arangod/ lib/ client-tools/ tests/ | grep -e '\.ipp$' -e '\.tpp$' -e '\.cpp$' -e '\.hpp$' -e '\.cc$' -e '\.c$' -e '\.h$' > CHANGED_FILES      
-      - name: run ls
-        run: ls -al
+      - name: extract base
+        run: echo "PR_BASE=${{ github.event.pull_request.base.sha }}" >> $GITHUB_ENV
+      - name: extract head
+        run: echo "PR_HEAD=${{ github.event.pull_request.head.sha }}" >> $GITHUB_ENV
+      - name: dump env
+        run: env
       - name: arangodb-clang-format
-        uses: arangodb/clang-format-action@1.0.1
+        uses: jsteemann/clang-format-action@0.0.9
