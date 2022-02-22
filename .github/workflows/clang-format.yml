@@ -20,7 +20,5 @@ jobs:
         run: echo "PR_BASE=${{ github.event.pull_request.base.sha }}" >> $GITHUB_ENV
       - name: extract head
         run: echo "PR_HEAD=${{ github.event.pull_request.head.sha }}" >> $GITHUB_ENV
-      - name: dump env
-        run: env
       - name: arangodb-clang-format
         uses: jsteemann/clang-format-action@0.0.9
